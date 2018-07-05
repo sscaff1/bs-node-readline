@@ -41,7 +41,7 @@ npm i --save bs-node-readline
 then add
 Then add `bs-node-readline` to `bs-dependencies` in your `bsconfig.json`:
 
-```json
+```js
 {
   ...
   "bs-dependencies": ["bs-node-readline"]
