@@ -1,5 +1,3 @@
-type t;
-
 type interface;
 
 [@bs.deriving abstract]
