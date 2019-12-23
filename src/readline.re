@@ -1,4 +1,4 @@
-type t;
+type interface;
 
 [@bs.deriving abstract]
 type interfaceOptions = {
@@ -17,12 +17,13 @@ type interfaceOptions = {
   removeHistoryDuplicates: int,
 };
 
-[@bs.module "readline"] external createInterface : interfaceOptions => t = "";
+[@bs.module "readline"]
+external createInterface: interfaceOptions => interface = "createInterface";
 
 [@bs.send]
-external on :
+external on:
   (
-    t,
+    interface,
     [@bs.string] [
       | `close(unit => unit)
       | `line(string => unit)
@@ -33,20 +34,22 @@ external on :
       | `SIGTSTP(unit => unit)
     ]
   ) =>
-  t =
-  "";
+  interface =
+  "on";
 
-[@bs.send] external close : t => unit = "";
+[@bs.send] external close: interface => unit = "close";
 
-[@bs.send] external pause : t => unit = "";
+[@bs.send] external pause: interface => unit = "pause";
 
-[@bs.send] external prompt : (t, ~preserveCursor: bool=?, unit) => unit = "";
+[@bs.send]
+external prompt: (interface, ~preserveCursor: bool=?, unit) => unit = "prompt";
 
-[@bs.send] external question : (t, string, string => unit) => unit = "";
+[@bs.send]
+external question: (interface, string, string => unit) => unit = "question";
 
-[@bs.send] external resume : t => unit = "";
+[@bs.send] external resume: interface => unit = "resume";
 
-[@bs.send] external setPrompt : (t, string) => unit = "";
+[@bs.send] external setPrompt: (interface, string) => unit = "setPrompt";
 
 [@bs.deriving abstract]
 type keyOption = {
@@ -59,4 +62,5 @@ type keyOption = {
   name: string,
 };
 
-[@bs.send] external write : (t, ~key: keyOption=?, unit) => unit = "";
+[@bs.send]
+external write: (interface, ~key: keyOption=?, unit) => unit = "write";
